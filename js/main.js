@@ -6,7 +6,7 @@ function loadMilstones(){
           <div class="milestone border-b">
             <div class="flex">
               <div class="checkbox"><input type="checkbox" /></div>
-              <div>
+              <div onclick="openMilstone(this)">
                 <p>
                  ${milstone.name}
                   <span><i class="fas fa-chevron-down"></i></span>
@@ -24,5 +24,22 @@ function loadMilstones(){
           </div>
         </div>`
     }).join("")}`
+}
+function openMilstone(milstoneElement){
+    const currentPannel= milstoneElement.parentNode.nextElementSibling;
+    const shownPannel=document.querySelector(".show");
+    const active=document.querySelector(".active");
+    //frist remove active if any[other than clicked one]
+    if(active && !milstoneElement.classList.contains("active")){
+        active.classList.remove("active");
+    }
+    //toggle current clicked one
+    milstoneElement.classList.toggle("active");
+    //frist hide previous pannel if open[other than clicked element]
+    if(!currentPannel.classList.contains("show") && shownPannel)
+        shownPannel.classList.remove("show");
+    //toggle current element
+    currentPannel.classList.toggle("show");
+    
 }
 loadMilstones()
